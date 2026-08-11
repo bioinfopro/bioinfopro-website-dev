@@ -1,0 +1,218 @@
+---
+---
+:root {
+    /* Brand Colors */
+    --primary-color: #0B1F35;    /* Deep blue */
+    --secondary-color: #25AEC6;  /* Pacific blue */
+    --accent-color: #9525AA;     /* Royal orchid */
+    --gray-color: #D9E2EC;       /* Alice blue */
+    --user-white: #F00000;       /* Requested white (Note: this is hex for Bright Red) */
+    
+    /* Standard Layout Colors */
+    --bg-color: #FFFFFF;
+    --text-main: #334155;
+    
+    /* Typography */
+    --font-titles: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    line-height: 1.7;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-titles);
+    color: var(--primary-color); /* Deep Blue for titles */
+    margin-bottom: 1rem;
+    margin-top: 1.5rem;
+    font-weight: 700;
+}
+
+h1 { font-size: 2.8rem; line-height: 1.2; }
+h2 { color: var(--secondary-color); font-size: 2rem; } /* Pacific Blue for Subtitles */
+h3 { font-size: 1.5rem; }
+
+p {
+    margin-bottom: 1.2rem;
+}
+
+a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Navigation */
+.navbar {
+    background-color: var(--primary-color);
+    padding: 1.2rem 0;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: #FFFFFF;
+    font-family: var(--font-titles);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+.logo:hover { text-decoration: none; }
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: var(--gray-color);
+}
+
+.nav-links a:hover {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+/* Main Content area */
+.page-content {
+    padding: 60px 20px;
+    min-height: 60vh;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    background-color: var(--accent-color); /* Royal Orchid highlight */
+    color: #FFFFFF;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn:hover {
+    background-color: #7b1d8c;
+    text-decoration: none;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+}
+
+/* Custom Markdown Attributes (Kramdown) */
+.callout {
+    background-color: var(--gray-color);
+    padding: 20px;
+    border-left: 5px solid var(--secondary-color);
+    border-radius: 4px;
+    margin: 25px 0;
+}
+
+.callout-accent {
+    border-left-color: var(--accent-color);
+}
+
+/* Code Snippets (Coderbyte inspiration) */
+pre {
+    background-color: var(--primary-color);
+    color: var(--gray-color);
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 25px 0;
+    font-size: 0.9rem;
+}
+code {
+    font-family: 'Fira Code', monospace, sans-serif;
+    background-color: var(--gray-color);
+    color: var(--primary-color);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+pre code {
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+}
+
+/* Banners & Components (Jekyll _includes) */
+.custom-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, var(--gray-color) 0%, #FFFFFF 100%);
+    border: 1px solid var(--gray-color);
+    padding: 30px;
+    border-radius: 8px;
+    margin: 40px 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.custom-banner h3 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: var(--primary-color);
+}
+
+.custom-banner p {
+    margin-bottom: 0;
+    color: var(--text-main);
+}
+
+/* PMI-style Cards Grid */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.feature-card {
+    border: 1px solid var(--gray-color);
+    padding: 30px;
+    border-radius: 8px;
+    transition: box-shadow 0.3s;
+}
+
+.feature-card:hover {
+    box-shadow: 0 10px 15px -3px rgba(11, 31, 53, 0.1);
+    border-color: var(--secondary-color);
+}
+
+.feature-card h3 {
+    margin-top: 0;
+}
+
+/* Footer */
+footer {
+    background-color: var(--gray-color);
+    color: var(--primary-color);
+    padding: 40px 0;
+    margin-top: 60px;
+}
+.text-center { text-align: center; }

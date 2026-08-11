@@ -1,0 +1,7 @@
+title: Acme Tech
+email: contact@example.com
+description: >-
+  A minimal, fast Jekyll template configured for GitHub pages with custom branding.
+baseurl: "" 
+url: "" 
+markdown: kramdown
