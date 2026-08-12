@@ -230,10 +230,33 @@ main {
 }
 
 // -----------------------------------------------------------------------
-// Hero (home layout)
+// Hero (home layout, and the about-page top hero via .hero--breakout)
 // -----------------------------------------------------------------------
 .hero {
   background-color: var(--color-alice-blue);
+}
+
+// On the home layout .hero sits directly in <main>, outside .page-inner,
+// so it's already full-bleed for free. Pages that use the default layout
+// (like about.md) wrap their content in .page-inner (42rem cap), so a
+// hero placed there needs to opt back out — same position/50vw technique
+// used elsewhere on the about page. The negative top margin cancels
+// .page-inner's own padding-top so the hero still sits flush against the
+// header with no stray gap above it.
+.hero--breakout {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  width: 100vw;
+  margin-top: calc(-1 * var(--space-4));
+  // Matches the space-4 bottom margin used between the other stacked
+  // sections on this page (.vision-cards, .future-state) so the hero
+  // hands off to the "About us" heading at the same rhythm as the rest
+  // of the page, instead of the heading butting right up against the
+  // hero's background edge.
+  margin-bottom: var(--space-4);
+  margin-left: -50vw;
+  margin-right: -50vw;
 }
 
 .hero-inner {
@@ -248,13 +271,20 @@ main {
   font-size: 0.8rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-royal-orchid);
+  color: var(--color-pacific-blue);
   margin-bottom: var(--space-2);
 }
 
+// Sets its own font-family/color/line-height rather than relying on a
+// heading tag's base styles, so it renders correctly whether it's an
+// <h1> (home hero) or a <p> (about-page hero, which keeps a single true
+// <h1> — "About us" — for its heading hierarchy).
 .hero-headline {
+  font-family: var(--font-display);
+  color: var(--color-deep-blue);
+  line-height: 1.15;
   font-size: clamp(2rem, calc(4vw + 1rem), 3.25rem);
-  margin-bottom: var(--space-2);
+  margin: 0 0 var(--space-2);
 }
 
 .hero-subhead {
@@ -365,17 +395,88 @@ main {
 }
 
 // -----------------------------------------------------------------------
-// Core values (about page)
+// Vision cards: Purpose, Core values, Mission (about page)
 //
-// Each value is paired 1:1 with one of the three brand accent colors, so
-// the palette itself signals "three distinct, equally-weighted pillars"
-// rather than a ranked or sequential list — no 01/02/03 numbering, because
-// nothing here is a sequence. The diamond mark repeats across all three
-// tiles as a shared emblem; only its color changes.
+// Purpose, Core values, and Mission are three equally-weighted parts of
+// one Vision section, so they share a single card pattern — .vision-card
+// supplies the padding/background/border/radius shell, .vision-card-label
+// supplies the uppercase eyebrow-style label — rather than reading as
+// three unrelated components. The only differentiator is color: each
+// label takes one of the three brand accents (pacific-blue / deep-blue /
+// royal-orchid — the same trio the individual values below use as
+// badges), so the section reads as one consistent system, not a special
+// one-off treatment per card. All three sit inline in the normal Vision
+// flow inside .page-inner — no full-bleed breakouts.
 // -----------------------------------------------------------------------
+.vision-cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0 0 var(--space-4);
+}
+
+.vision-card {
+  padding: var(--space-4) var(--space-3);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-alice-blue);
+  border-radius: var(--radius);
+}
+
+.vision-card-label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 var(--space-2);
+}
+
+.vision-card-label--pacific-blue {
+  color: var(--color-pacific-blue);
+}
+
+.vision-card-label--deep-blue {
+  color: var(--color-deep-blue);
+}
+
+.vision-card-label--royal-orchid {
+  color: var(--color-royal-orchid);
+}
+
+// Shared statement scale for the single-sentence cards (Purpose, Mission).
+// Core values keeps its own .value-lead/.value-rest split below since it's
+// a list of short paragraphs, not one sentence, but sits in the same
+// .vision-card shell as its siblings.
+.vision-card-statement {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 1.2rem;
+  line-height: 1.55;
+  color: var(--color-deep-blue);
+  margin: 0;
+}
+
+// Figures in the Mission statement get the display face and full-strength
+// royal orchid so they read as stamped-in numbers without turning the
+// sentence into a headline.
+.mission-stat {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--color-royal-orchid);
+}
+
+@media (max-width: 40rem) {
+  .vision-card {
+    padding: var(--space-3);
+  }
+}
+
+// Core values stack one per row at every width, divided by a hairline
+// rather than each getting its own card chrome — the outer .vision-card
+// already supplies the "cardness" for the group.
 .values {
   list-style: none;
-  margin: var(--space-3) 0 var(--space-4);
+  margin: 0;
   padding: 0;
 }
 
@@ -390,6 +491,10 @@ main {
 .value:first-child {
   border-top: none;
   padding-top: 0;
+}
+
+.value:last-child {
+  padding-bottom: 0;
 }
 
 .value-badge {
@@ -427,97 +532,24 @@ main {
 }
 
 // .value-desc carries card-body's base look (deep blue, softened) but
-// splits it unevenly between its two spans: .value-lead reads at full
-// strength so the one-line thesis lands first, .value-rest steps back so
-// the supporting sentences don't compete with it for attention.
+// splits it unevenly between its two spans: .value-lead steps up in both
+// weight and size so the one-line thesis reads as its own size tier (not
+// just a bolder run of body text), while .value-rest stays at body size
+// and steps back in opacity so the supporting sentences don't compete
+// with it for attention.
 .value-desc {
   color: var(--color-deep-blue);
 }
 
 .value-lead {
+  font-size: 1.05rem;
   font-weight: 600;
 }
 
 .value-rest {
+  font-size: 1rem;
   font-weight: 400;
   opacity: 0.7;
-}
-
-// -----------------------------------------------------------------------
-// Purpose & Mission banners (about page)
-//
-// Purpose and Mission are deliberately different in kind, so they get
-// different treatments rather than a matched pair of identical cards.
-// Purpose is timeless and aspirational: a dark, display-type banner with
-// no numbers in it. Mission is a dated, measurable commitment: a lighter,
-// plainer-set sentence where the two figures (2035, 80%) are called out
-// as the only colored elements, like figures on a signed pledge.
-// -----------------------------------------------------------------------
-.purpose-banner {
-  background-color: var(--color-deep-blue);
-  border-radius: var(--radius);
-  padding: var(--space-4) var(--space-3);
-  margin: 0 0 var(--space-3);
-}
-
-.purpose-label {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-pacific-blue);
-  margin: 0 0 var(--space-2);
-}
-
-.purpose-statement {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(1.4rem, calc(2.5vw + 1rem), 2rem);
-  line-height: 1.3;
-  color: var(--color-white);
-  margin: 0;
-}
-
-.mission-banner {
-  background-color: var(--color-alice-blue);
-  border-radius: var(--radius);
-  padding: var(--space-4) var(--space-3);
-  margin: 0 0 var(--space-4);
-}
-
-.mission-label {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-royal-orchid);
-  margin: 0 0 var(--space-2);
-}
-
-.mission-statement {
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 1.2rem;
-  line-height: 1.55;
-  color: var(--color-deep-blue);
-  margin: 0;
-}
-
-// Figures get the display face and full-strength royal orchid so they read
-// as stamped-in numbers without turning the sentence into a headline.
-.mission-stat {
-  font-family: var(--font-display);
-  font-weight: 700;
-  color: var(--color-royal-orchid);
-}
-
-@media (max-width: 40rem) {
-  .purpose-banner,
-  .mission-banner {
-    padding: var(--space-3);
-  }
 }
 
 // -----------------------------------------------------------------------
