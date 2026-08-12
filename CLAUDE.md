@@ -11,9 +11,9 @@
 - Never put API keys, internal credentials, or files from `agents/` into `src/`.
 
 ## Git Rules
-- No agent (main thread or any subagent, current or future) may run `git commit`, `git push`, or any command that publishes to a remote or rewrites shared history — in this or any repo it works in. This is enforced technically via `permissions.deny` in `.claude/settings.json` (`Bash(git commit*)`, `Bash(git push*)`), not just as a prose rule.
-- Leave changes staged/unstaged in the working tree and report what changed. Committing and pushing is always the user's explicit, in-the-moment action — never assume a prior approval carries forward to a later commit/push.
-- If a task genuinely can't be finished without a commit or push, stop and tell the user what's blocked and why, rather than working around the restriction.
+- `git commit`, `git push`, and any command that publishes to a remote or rewrites shared history require the user's explicit, in-the-moment approval — never assume a prior approval carries forward to a later commit/push. This is enforced technically via `permissions.ask` in `.claude/settings.json` (`Bash(git commit*)`, `Bash(git push*)`): every such command, from the main thread or any subagent, pauses for a permission prompt the user must approve before it runs. (Claude Code's permission system can't scope a rule to "subagents only" — an `ask` rule applies project-wide to whoever issues the command, which is why the main thread is gated too.)
+- Subagents (`.claude/agents/*.md`) are additionally instructed to never run these commands themselves at all, even with the prompt available — committing and pushing is the main thread/user's call, not something a subagent should reach for even to "finish" a task.
+- If a task genuinely can't be finished without a commit or push, say so and let the user decide, rather than working around the restriction.
 
 ## Commands
 - Run local server: `bundle exec jekyll serve`
