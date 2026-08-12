@@ -1,5 +1,7 @@
 <footer class="site-footer">
   <div class="footer-inner">
-    <p>[ {{ site.title }} ] &mdash; [ year placeholder ]</p>
+    <p>{{ site.title }} &copy; {{ 'now' | date: '%Y' }}</p>
+    <p>Founded in 2026, based in Toronto, Canada.</p>
+    <p>Questions? Reach us at <a href="mailto:{{ site.email }}">{{ site.email }}</a>.</p>
   </div>
 </footer>
