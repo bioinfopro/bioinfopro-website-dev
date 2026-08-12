@@ -1,0 +1,39 @@
+---
+layout: default
+---
+<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">[ eyebrow / label placeholder ]</p>
+    <h1 class="hero-headline">[ Hero headline placeholder ]</h1>
+    <p class="hero-subhead">[ Hero subheadline placeholder — one to two sentences of supporting copy will go here. ]</p>
+    <a class="btn btn-primary" href="{{ '/community/' | relative_url }}">[ CTA placeholder ]</a>
+  </div>
+</section>
+
+<section class="teasers" aria-labelledby="teasers-heading">
+  <h2 id="teasers-heading" class="visually-hidden">Site sections</h2>
+  <div class="teasers-inner">
+    <article class="card">
+      <div class="card-media" aria-hidden="true">[ image placeholder ]</div>
+      <h3 class="card-title">About</h3>
+      <p class="card-body">[ About teaser placeholder text ]</p>
+      <a class="card-link" href="{{ '/about/' | relative_url }}">[ Learn more placeholder ] &rarr;</a>
+    </article>
+
+    <article class="card">
+      <div class="card-media" aria-hidden="true">[ image placeholder ]</div>
+      <h3 class="card-title">Community</h3>
+      <p class="card-body">[ Community teaser placeholder text ]</p>
+      <a class="card-link" href="{{ '/community/' | relative_url }}">[ Learn more placeholder ] &rarr;</a>
+    </article>
+
+    <article class="card">
+      <div class="card-media" aria-hidden="true">[ image placeholder ]</div>
+      <h3 class="card-title">Services</h3>
+      <p class="card-body">[ Services teaser placeholder text ]</p>
+      <a class="card-link" href="{{ '/services/' | relative_url }}">[ Learn more placeholder ] &rarr;</a>
+    </article>
+  </div>
+</section>
+
+{{ content }}

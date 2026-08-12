@@ -1,0 +1,36 @@
+<nav class="site-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a class="wordmark" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+
+    <ul class="nav-links">
+      <li>
+        <a
+          class="nav-link{% if page.url == '/' %} is-active{% endif %}"
+          href="{{ '/' | relative_url }}"
+          {% if page.url == '/' %}aria-current="page"{% endif %}
+        >Home</a>
+      </li>
+      <li>
+        <a
+          class="nav-link{% if page.url == '/about/' %} is-active{% endif %}"
+          href="{{ '/about/' | relative_url }}"
+          {% if page.url == '/about/' %}aria-current="page"{% endif %}
+        >About</a>
+      </li>
+      <li>
+        <a
+          class="nav-link{% if page.url == '/community/' %} is-active{% endif %}"
+          href="{{ '/community/' | relative_url }}"
+          {% if page.url == '/community/' %}aria-current="page"{% endif %}
+        >Community</a>
+      </li>
+      <li>
+        <a
+          class="nav-link{% if page.url == '/services/' %} is-active{% endif %}"
+          href="{{ '/services/' | relative_url }}"
+          {% if page.url == '/services/' %}aria-current="page"{% endif %}
+        >Services</a>
+      </li>
+    </ul>
+  </div>
+</nav>

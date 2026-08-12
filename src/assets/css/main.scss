@@ -1,0 +1,370 @@
+---
+---
+
+// -----------------------------------------------------------------------
+// Brand tokens (fixed — see .claude/skills/frontend-design/SKILL.md)
+// -----------------------------------------------------------------------
+:root {
+  --color-deep-blue: #0B1F35;
+  --color-pacific-blue: #25AEC6;
+  --color-royal-orchid: #9525AA;
+  --color-alice-blue: #D9E2EC;
+  --color-white: #FFFFFF;
+
+  --font-display: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Inter", "Helvetica Neue", Arial, sans-serif;
+
+  --container-width: 72rem;
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2.5rem;
+  --space-5: 4rem;
+
+  --radius: 0.5rem;
+  --transition-fast: 0.15s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0s;
+  }
+}
+
+// -----------------------------------------------------------------------
+// Reset & base
+// -----------------------------------------------------------------------
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-deep-blue);
+  background-color: var(--color-white);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  color: var(--color-deep-blue);
+  line-height: 1.15;
+  margin: 0 0 var(--space-2);
+}
+
+p {
+  margin: 0 0 var(--space-2);
+}
+
+a {
+  color: var(--color-pacific-blue);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-royal-orchid);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+// Consistent, visible keyboard focus everywhere.
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--color-royal-orchid);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: -3rem;
+  left: var(--space-2);
+  z-index: 100;
+  padding: var(--space-1) var(--space-2);
+  background: var(--color-deep-blue);
+  color: var(--color-white);
+  border-radius: var(--radius);
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+  top: var(--space-2);
+}
+
+// -----------------------------------------------------------------------
+// Layout container
+// -----------------------------------------------------------------------
+main {
+  flex: 1 0 auto;
+}
+
+.nav-inner,
+.hero-inner,
+.teasers-inner,
+.footer-inner,
+.page-inner {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 var(--space-3);
+}
+
+// -----------------------------------------------------------------------
+// Site header / nav
+// -----------------------------------------------------------------------
+.site-header {
+  border-bottom: 1px solid var(--color-alice-blue);
+  background-color: var(--color-white);
+}
+
+.site-nav {
+  padding: var(--space-2) 0;
+}
+
+.nav-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--color-deep-blue);
+  letter-spacing: -0.01em;
+}
+
+.wordmark:hover {
+  color: var(--color-deep-blue);
+  opacity: 0.75;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  position: relative;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--color-deep-blue);
+  padding: var(--space-1) 0;
+}
+
+.nav-link:hover {
+  color: var(--color-pacific-blue);
+}
+
+.nav-link.is-active {
+  color: var(--color-pacific-blue);
+}
+
+.nav-link.is-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background-color: var(--color-pacific-blue);
+  border-radius: 2px;
+}
+
+@media (max-width: 40rem) {
+  .nav-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    gap: var(--space-2);
+  }
+}
+
+// -----------------------------------------------------------------------
+// Hero (home layout)
+// -----------------------------------------------------------------------
+.hero {
+  background-color: var(--color-alice-blue);
+}
+
+.hero-inner {
+  padding-top: var(--space-5);
+  padding-bottom: var(--space-5);
+  max-width: 42rem;
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-pacific-blue);
+  margin-bottom: var(--space-2);
+}
+
+.hero-headline {
+  font-size: clamp(2rem, calc(4vw + 1rem), 3.25rem);
+  margin-bottom: var(--space-2);
+}
+
+.hero-subhead {
+  font-size: 1.1rem;
+  color: var(--color-deep-blue);
+  opacity: 0.85;
+  margin-bottom: var(--space-3);
+}
+
+// -----------------------------------------------------------------------
+// Buttons
+// -----------------------------------------------------------------------
+.btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius);
+  transition: background-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+}
+
+.btn-primary {
+  background-color: var(--color-royal-orchid);
+  color: var(--color-white);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-deep-blue);
+  color: var(--color-white);
+  transform: translateY(-1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary:hover {
+    transform: none;
+  }
+}
+
+// -----------------------------------------------------------------------
+// Teaser cards
+// -----------------------------------------------------------------------
+.teasers-inner {
+  padding-top: var(--space-5);
+  padding-bottom: var(--space-5);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+}
+
+@media (max-width: 48rem) {
+  .teasers-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-3);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-alice-blue);
+  border-radius: var(--radius);
+}
+
+.card-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 8rem;
+  margin-bottom: var(--space-2);
+  border: 1px dashed var(--color-alice-blue);
+  border-radius: var(--radius);
+  color: var(--color-pacific-blue);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.card-title {
+  font-size: 1.15rem;
+  margin-bottom: var(--space-1);
+}
+
+.card-body {
+  color: var(--color-deep-blue);
+  opacity: 0.85;
+  flex: 1 0 auto;
+}
+
+.card-link {
+  font-weight: 600;
+  color: var(--color-pacific-blue);
+}
+
+.card-link:hover {
+  color: var(--color-royal-orchid);
+}
+
+// -----------------------------------------------------------------------
+// Generic page content (about / community / services placeholders)
+// -----------------------------------------------------------------------
+.page-inner {
+  padding-top: var(--space-4);
+  padding-bottom: var(--space-5);
+  max-width: 42rem;
+}
+
+// -----------------------------------------------------------------------
+// Footer
+// -----------------------------------------------------------------------
+.site-footer {
+  border-top: 1px solid var(--color-alice-blue);
+  background-color: var(--color-alice-blue);
+}
+
+.footer-inner {
+  padding: var(--space-3);
+  font-size: 0.85rem;
+  color: var(--color-deep-blue);
+  opacity: 0.75;
+}

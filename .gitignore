@@ -7,3 +7,4 @@ Gemfile.lock
 knowledge/
 .claude/
 CLAUDE.md
+.DS_store
