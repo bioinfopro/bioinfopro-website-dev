@@ -26,7 +26,7 @@ permalink: pretty
 description: >- # this means to ignore newlines until "baseurl:"
   Home of the Association of Bioinformatics Professionals
 baseurl: "/bioinfopro-website-dev" # the subpath of your site, e.g. /blog
-url: "https://bioinfopro.github.io/bioinfopro-website-dev/" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://bioinfopro.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  bioinfopro
 repository: bioinfopro/bioinfopro-website-dev # lets jekyll-github-metadata resolve the repo in CI without relying on git-remote detection
 
