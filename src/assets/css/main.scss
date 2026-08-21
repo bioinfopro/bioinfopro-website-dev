@@ -368,3 +368,47 @@ main {
   color: var(--color-deep-blue);
   opacity: 0.75;
 }
+
+.substack-card {
+  max-width: 620px;
+  margin: 3rem auto;
+  padding: 2rem;
+  border: 1px solid #222;
+  border-radius: 18px;
+  background: #faf8f3;
+  font-family: Georgia, serif;
+}
+
+.substack-card .eyebrow {
+  font-family: system-ui, sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  opacity: 0.55;
+}
+
+.substack-card h2 {
+  font-size: 2rem;
+  margin: 0.5rem 0;
+}
+
+.substack-card p {
+  line-height: 1.6;
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+}
+
+.substack-button {
+  display: inline-block;
+  padding: 0.8rem 1.2rem;
+  background: #111;
+  color: white;
+  border-radius: 999px;
+  text-decoration: none;
+  font-family: system-ui, sans-serif;
+  font-weight: 600;
+  transition: transform 0.15s ease;
+}
+
+.substack-button:hover {
+  transform: translateY(-2px);
+}
