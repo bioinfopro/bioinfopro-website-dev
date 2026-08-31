@@ -10,10 +10,10 @@ Join our community
 
 <section class="substack-card">
   <div>
-    <span class="eyebrow">✦ THE UNFINISHED PROFESSION</span>
-    <h2>Read about the unresolved dependencies of our trade.</h2>
+    <span class="eyebrow">✦UNRESOLVED DEPENDENCIES</span>
+    <h2>Read about the unfinished side of bioinformatics.</h2>
     <p>
-      Essays, notes, discoveries, and open letters from our community members.
+      Essays, notes, opeds, discoveries, and open letters from our community members.
     </p>
   </div>
 
