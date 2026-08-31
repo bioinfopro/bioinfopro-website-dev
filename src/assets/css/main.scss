@@ -249,14 +249,64 @@ main {
   right: 50%;
   width: 100vw;
   margin-top: calc(-1 * var(--space-4));
-  // Matches the space-4 bottom margin used between the other stacked
-  // sections on this page (.vision-cards, .future-state) so the hero
-  // hands off to the "About us" heading at the same rhythm as the rest
-  // of the page, instead of the heading butting right up against the
-  // hero's background edge.
+  // A space-4 gap below the hero so it hands off to the "About us"
+  // heading with breathing room, instead of the heading butting right
+  // up against the hero's background edge.
   margin-bottom: var(--space-4);
   margin-left: -50vw;
   margin-right: -50vw;
+}
+
+// Per-page hero artwork. Each of these heroes carries a decorative SVG on
+// a ::before layer (rather than on .hero itself) so its opacity can be
+// dialled right down for text contrast without also fading the eyebrow,
+// headline and subhead. position + overflow on the hero set up that
+// layer.
+//   .hero--home      → wavefronts   (<section class="hero hero--home">)
+//   .hero--about     → growth       (<section class="hero hero--breakout hero--about">)
+//   .hero--community → resolution   (<section class="hero hero--breakout hero--community">)
+.hero--home,
+.hero--about,
+.hero--community {
+  position: relative;
+  overflow: hidden;
+}
+
+// inset: 0 + background-size: cover make the artwork span the entire hero
+// box on every screen size (it scales up to fill, cropping its own edges
+// rather than ever leaving a gap); it's centred so the focal point of
+// each composition stays roughly in view.
+.hero--home::before,
+.hero--about::before,
+.hero--community::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.hero--home::before {
+  background-image: url("../bioinfopro-hero-07-wavefronts.svg");
+}
+
+.hero--about::before {
+  background-image: url("../bioinfopro-hero-05-growth.svg");
+}
+
+.hero--community::before {
+  background-image: url("../bioinfopro-hero-12-resolution.svg");
+}
+
+// Keep the hero copy above the artwork layer.
+.hero--home .hero-inner,
+.hero--about .hero-inner,
+.hero--community .hero-inner {
+  position: relative;
+  z-index: 1;
 }
 
 .hero-inner {
@@ -296,6 +346,17 @@ main {
 
 // -----------------------------------------------------------------------
 // Buttons
+//
+// Site convention — the variant is chosen by what the control does, not
+// by how prominent we want it to look:
+//   .btn .btn-primary   — a call to action: the thing we're asking the
+//                         reader to do (subscribe, join, sign up, submit).
+//                         Filled royal orchid. No trailing "→".
+//   .btn .btn-secondary  — a link out to another resource or page (read
+//                         more, visit X, see the docs). Plain grey text
+//                         link that turns royal orchid on hover.
+// Every button-styled control uses one of these two — don't add a third
+// weight or restyle .btn inline.
 // -----------------------------------------------------------------------
 .btn {
   display: inline-block;
@@ -307,6 +368,8 @@ main {
   transition: background-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
+// No trailing "→" on the label (see convention above); arrows belong on
+// inline text links like .card-link, not filled buttons.
 .btn-primary {
   background-color: var(--color-royal-orchid);
   color: var(--color-white);
@@ -322,6 +385,24 @@ main {
   .btn-primary:hover {
     transform: none;
   }
+}
+
+// Secondary: a plain inline text link — no fill, no outline, no padding.
+// Quiet grey and regular weight at rest; the text turns full-strength
+// royal orchid on hover. The global a:hover orchid ring is cancelled so
+// only the colour shifts.
+.btn-secondary {
+  padding: 0;
+  font-weight: 400;
+  background-color: transparent;
+  color: var(--color-deep-blue);
+  opacity: 0.6;
+}
+
+.btn-secondary:hover {
+  color: var(--color-royal-orchid);
+  opacity: 1;
+  box-shadow: none;
 }
 
 // -----------------------------------------------------------------------
@@ -375,14 +456,14 @@ main {
   flex: 1 0 auto;
 }
 
+// Marked up as .btn .btn-secondary (a link out to another page). This
+// class handles placement only: pinned to the card's bottom-right —
+// margin-top eats the slack so the link sits at the foot even when the
+// card is stretched taller than its content, align-self keeps it tight
+// to its text at the right rather than spanning the card width.
 .card-link {
-  font-weight: 600;
-  color: var(--color-pacific-blue);
-}
-
-.card-link:hover {
-  box-shadow: 0 0 0 2px var(--color-royal-orchid-tint);
-  border-radius: 2px;
+  align-self: flex-end;
+  margin-top: auto;
 }
 
 // -----------------------------------------------------------------------
@@ -395,24 +476,22 @@ main {
 }
 
 // -----------------------------------------------------------------------
-// Vision cards: Purpose, Core values, Mission (about page)
+// Vision cards: Core values, Purpose, Mission (about page)
 //
-// Purpose, Core values, and Mission are three equally-weighted parts of
-// one Vision section, so they share a single card pattern — .vision-card
-// supplies the padding/background/border/radius shell, .vision-card-label
-// supplies the uppercase eyebrow-style label — rather than reading as
-// three unrelated components. The only differentiator is color: each
-// label takes one of the three brand accents (pacific-blue / deep-blue /
-// royal-orchid — the same trio the individual values below use as
-// badges), so the section reads as one consistent system, not a special
-// one-off treatment per card. All three sit inline in the normal Vision
-// flow inside .page-inner — no full-bleed breakouts.
+// Three equally-weighted parts of the Vision section, sharing one card
+// pattern: .vision-card supplies the padding/background/border/radius
+// shell, .vision-card-label the uppercase eyebrow-style label. They
+// stack in a single column inside .page-inner — no full-bleed breakouts.
+//
+// Purpose and Mission carry a single .vision-card-statement sentence.
+// Core values instead nests a .value-subcards list — one inset
+// .value-subcard per value — inside the same shell.
 // -----------------------------------------------------------------------
 .vision-cards {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  margin: 0 0 var(--space-4);
+  margin: var(--space-3) 0 var(--space-4);
 }
 
 .vision-card {
@@ -428,25 +507,10 @@ main {
   font-size: 0.8rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  color: var(--color-pacific-blue);
   margin: 0 0 var(--space-2);
 }
 
-.vision-card-label--pacific-blue {
-  color: var(--color-pacific-blue);
-}
-
-.vision-card-label--deep-blue {
-  color: var(--color-deep-blue);
-}
-
-.vision-card-label--royal-orchid {
-  color: var(--color-royal-orchid);
-}
-
-// Shared statement scale for the single-sentence cards (Purpose, Mission).
-// Core values keeps its own .value-lead/.value-rest split below since it's
-// a list of short paragraphs, not one sentence, but sits in the same
-// .vision-card shell as its siblings.
 .vision-card-statement {
   font-family: var(--font-body);
   font-weight: 500;
@@ -456,181 +520,47 @@ main {
   margin: 0;
 }
 
-// Figures in the Mission statement get the display face and full-strength
-// royal orchid so they read as stamped-in numbers without turning the
-// sentence into a headline.
-.mission-stat {
-  font-family: var(--font-display);
-  font-weight: 700;
+// Nested value subcards — no surface of their own; each is a royal-orchid
+// eyebrow rule over a paragraph, separated from the next by the list gap.
+// No padding, so every line inside aligns flush with the card label above.
+.value-subcards {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-2) * 0.66);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.value-subcard {
+  padding: 0;
+  background-color: transparent;
+}
+
+// Eyebrow carrying the value's name — uppercase, tracked, royal orchid.
+// No left inset, so the first character lines up with the paragraph
+// text below.
+.value-subcard-eyebrow {
+  display: block;
+  margin: 0 0 var(--space-2);
+  padding: 0;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--color-royal-orchid);
+}
+
+.value-subcard-body {
+  color: var(--color-deep-blue);
+  margin: 0;
 }
 
 @media (max-width: 40rem) {
   .vision-card {
     padding: var(--space-3);
   }
-}
-
-// Core values stack one per row at every width, divided by a hairline
-// rather than each getting its own card chrome — the outer .vision-card
-// already supplies the "cardness" for the group.
-.values {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.value {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-3);
-  padding: var(--space-3) 0;
-  border-top: 1px solid var(--color-alice-blue);
-}
-
-.value:first-child {
-  border-top: none;
-  padding-top: 0;
-}
-
-.value:last-child {
-  padding-bottom: 0;
-}
-
-.value-badge {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 3rem;
-  height: 3rem;
-  border-radius: var(--radius);
-}
-
-.value-badge::before {
-  content: "";
-  width: 0.65rem;
-  height: 0.65rem;
-  background-color: var(--color-white);
-  transform: rotate(45deg);
-}
-
-.value-badge--deep-blue {
-  background-color: var(--color-deep-blue);
-}
-
-.value-badge--pacific-blue {
-  background-color: var(--color-pacific-blue);
-}
-
-.value-badge--royal-orchid {
-  background-color: var(--color-royal-orchid);
-}
-
-.value-copy {
-  min-width: 0;
-}
-
-// .value-desc carries card-body's base look (deep blue, softened) but
-// splits it unevenly between its two spans: .value-lead steps up in both
-// weight and size so the one-line thesis reads as its own size tier (not
-// just a bolder run of body text), while .value-rest stays at body size
-// and steps back in opacity so the supporting sentences don't compete
-// with it for attention.
-.value-desc {
-  color: var(--color-deep-blue);
-}
-
-.value-lead {
-  font-size: 1.05rem;
-  font-weight: 600;
-}
-
-.value-rest {
-  font-size: 1rem;
-  font-weight: 400;
-  opacity: 0.7;
-}
-
-// -----------------------------------------------------------------------
-// "What 2035 looks like" panels (about page)
-//
-// Three themed panels, one per brand accent, mirroring the value-badge
-// diamond mark. .page-inner caps out at 42rem, which is too narrow for a
-// readable 3-up grid of long paragraphs, so panels stack in a single
-// column at every width rather than force a cramped grid — see note to
-// copywriter/dev if a wider treatment is wanted later.
-// -----------------------------------------------------------------------
-.future-state {
-  margin: 0 0 var(--space-4);
-}
-
-.future-state-heading {
-  font-size: 1.35rem;
-  padding-bottom: var(--space-2);
-  margin: 0 0 var(--space-3);
-  border-bottom: 1px solid var(--color-alice-blue);
-}
-
-.future-panels {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  margin: 0;
-  padding: 0;
-}
-
-.future-panel {
-  padding: var(--space-3);
-  background-color: var(--color-white);
-  border: 1px solid var(--color-alice-blue);
-  border-top: 3px solid transparent;
-  border-radius: var(--radius);
-}
-
-.future-panel-mark {
-  display: block;
-  width: 0.65rem;
-  height: 0.65rem;
-  margin-bottom: var(--space-2);
-  border-radius: 1px;
-  transform: rotate(45deg);
-}
-
-.future-panel--deep-blue {
-  border-top-color: var(--color-deep-blue);
-}
-
-.future-panel--deep-blue .future-panel-mark {
-  background-color: var(--color-deep-blue);
-}
-
-.future-panel--pacific-blue {
-  border-top-color: var(--color-pacific-blue);
-}
-
-.future-panel--pacific-blue .future-panel-mark {
-  background-color: var(--color-pacific-blue);
-}
-
-.future-panel--royal-orchid {
-  border-top-color: var(--color-royal-orchid);
-}
-
-.future-panel--royal-orchid .future-panel-mark {
-  background-color: var(--color-royal-orchid);
-}
-
-.future-panel-title {
-  font-size: 1.1rem;
-  margin: 0 0 var(--space-1);
-}
-
-.future-panel-body {
-  color: var(--color-deep-blue);
-  opacity: 0.85;
-  margin: 0;
 }
 
 // -----------------------------------------------------------------------
@@ -648,46 +578,188 @@ main {
   opacity: 0.75;
 }
 
-.substack-card {
-  max-width: 620px;
-  margin: 3rem auto;
-  padding: 2rem;
-  border: 1px solid #222;
-  border-radius: 18px;
-  background: #faf8f3;
-  font-family: Georgia, serif;
+// =======================================================================
+// Reusable card patterns
+//
+// Two site-wide card components — prefer these over inventing a one-off
+// card for a new page. If one needs a variant, add a modifier class in
+// this file rather than restyling it inline. Both sit on the same shell
+// (white surface, 1px alice-blue hairline, var(--radius)) and use the
+// spacing / colour / type tokens throughout, so they inherit the site
+// look automatically.
+//
+//   .cta-card    One offer, one action. Eyebrow + heading + a sentence
+//                or two + a single `.btn .btn-primary` pinned to the card
+//                foot. Use when the card's whole job is to get the reader
+//                to DO something (subscribe, join, register, contact).
+//
+//   .entry-card  A directory entry that points elsewhere. Title + a
+//                category tag sharing one line, a description, and a
+//                `.btn .btn-secondary` link at the bottom-right. Use for
+//                lists of resources, links, references, further reading.
+//
+// Each block below carries its own copy-paste HTML skeleton and notes on
+// which container / layout to wrap it in.
+// =======================================================================
+
+// -----------------------------------------------------------------------
+// .cta-card — call-to-action card
+//
+//   <div class="cta-card-grid">          <!-- container: see note below -->
+//     <article class="cta-card">
+//       <p class="cta-card-eyebrow">Eyebrow</p>
+//       <div class="cta-card-body">
+//         <h2>One-line pitch</h2>
+//         <p>A sentence or two of context.</p>
+//         <a class="btn btn-primary" href="…">Do the thing</a>
+//       </div>
+//     </article>
+//     …more .cta-card…
+//   </div>
+//
+// Container: .cta-card-grid is a 2-up grid that stacks below 40rem. A
+// lone card needs no wrapper. .cta-card-body is a flex column that grows,
+// so the button stays foot-aligned and buttons line up across a row of
+// cards with uneven copy.
+// -----------------------------------------------------------------------
+.cta-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+  margin: var(--space-4) 0 var(--space-5);
 }
 
-.substack-card .eyebrow {
-  font-family: system-ui, sans-serif;
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  opacity: 0.55;
+@media (max-width: 40rem) {
+  .cta-card-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
-.substack-card h2 {
-  font-size: 2rem;
-  margin: 0.5rem 0;
+.cta-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-3);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-alice-blue);
+  border-radius: var(--radius);
 }
 
-.substack-card p {
-  line-height: 1.6;
-  opacity: 0.7;
-  margin-bottom: 1.5rem;
-}
-
-.substack-button {
-  display: inline-block;
-  padding: 0.8rem 1.2rem;
-  background: #111;
-  color: white;
-  border-radius: 999px;
-  text-decoration: none;
-  font-family: system-ui, sans-serif;
+.cta-card-eyebrow {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-body);
   font-weight: 600;
-  transition: transform 0.15s ease;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-pacific-blue);
 }
 
-.substack-button:hover {
-  transform: translateY(-2px);
+.cta-card-body {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+}
+
+.cta-card-body h2 {
+  font-size: 1.5rem;
+  margin: 0 0 var(--space-2);
+}
+
+// The paragraph grows so the button sits at the card foot — keeps buttons
+// aligned across a row of cards with uneven copy.
+.cta-card-body p {
+  flex: 1 0 auto;
+  color: var(--color-deep-blue);
+  opacity: 0.85;
+  margin: 0 0 var(--space-3);
+}
+
+.cta-card-body .btn {
+  align-self: flex-start;
+}
+
+// -----------------------------------------------------------------------
+// .entry-card — directory-entry card
+//
+//   <ul class="entry-list">
+//     <li>
+//       <article class="entry-card">
+//         <div class="entry-card-head">
+//           <h3>Entry title</h3>
+//           <span class="entry-card-tag">Category</span>
+//         </div>
+//         <p class="entry-card-blurb">One sentence on what it is.</p>
+//         <a class="btn btn-secondary entry-card-link" href="…">Visit …</a>
+//       </article>
+//     </li>
+//     …more entries…
+//   </ul>
+//
+// Container: .entry-list is a plain vertical stack. Cards are full-width
+// and horizontal; for a multi-column arrangement, drop the <ul>/<li> and
+// place .entry-card in a grid instead. .entry-card-link is placement only
+// — its appearance comes from .btn .btn-secondary.
+// -----------------------------------------------------------------------
+.entry-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: var(--space-4) 0 var(--space-5);
+  padding: 0;
+  list-style: none;
+}
+
+.entry-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-3);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-alice-blue);
+  border-radius: var(--radius);
+}
+
+// Row 1 — title on the left, category tag on the right, sharing a line.
+.entry-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.entry-card-head h3 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+// The category tag — a shaded pill held to its content width. Not an
+// eyebrow: it sits beside the title, not above it.
+.entry-card-tag {
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0.25rem var(--space-2);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--color-royal-orchid);
+  background-color: var(--color-royal-orchid-tint);
+  border-radius: 999px;
+}
+
+// Row 2 — description.
+.entry-card-blurb {
+  color: var(--color-deep-blue);
+  opacity: 0.85;
+  margin: 0;
+}
+
+// Row 3 — the link, pinned bottom-right. Placement only: margin-top eats
+// any slack when the card is stretched taller than its content.
+.entry-card-link {
+  align-self: flex-end;
+  margin-top: auto;
 }

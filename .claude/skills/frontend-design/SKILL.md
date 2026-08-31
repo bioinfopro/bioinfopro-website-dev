@@ -26,6 +26,18 @@ Whenever designing UI or writing code, you must strictly adhere to these officia
 
 ---
 
+## Existing building blocks — reuse before inventing
+
+`src/assets/css/main.scss` is the site style guide. Before designing a new component, check whether one of these already fits and reuse it — add a modifier class in `main.scss` if you need a variant — rather than hand-rolling a one-off card or button:
+
+- **Buttons** — `.btn .btn-primary` for a call to action (the thing you're asking the reader to do: subscribe, join, register); `.btn .btn-secondary` for a link out to another page or resource. Primary buttons carry no trailing "→".
+- **`.cta-card`** (laid out in `.cta-card-grid`) — one offer, one action: eyebrow + heading + a sentence or two + a single primary button pinned to the card foot.
+- **`.entry-card`** (laid out in `.entry-list`) — a directory entry that points elsewhere: title + a category tag sharing one line, a description, and a secondary link at the bottom-right. Use for lists of resources, references, further reading.
+
+Each block in `main.scss` carries a copy-paste HTML skeleton in its comment. All of the above are built from the shared tokens (`--space-*`, `--color-*`, `--radius`, `--font-*`), so they pick up the site look automatically. If you extend the set, follow the same pattern: a documented block in `main.scss` with its own HTML skeleton.
+
+---
+
 ## Ground it in the subject
 
 If the brief does not pin down what the product or subject is, pin it yourself before designing: name one concrete subject, its audience, and the page's single job, and state your choice. If there's any information in your memory about the human's preferences, context about what they're building, or designs you've made before – use that as a hint. The subject's own world, its materials, instruments, artifacts, and vernacular, is where distinctive choices come from. Build with the brief's real content and subject matter throughout.

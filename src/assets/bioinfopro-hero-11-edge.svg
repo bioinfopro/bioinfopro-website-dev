@@ -1,0 +1,21 @@
+<?xml version="1.0"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 800" width="2400" height="800" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A field of parallel lines bending as it passes a boundary">
+  <rect x="0" y="0" width="2400" height="800" fill="#ffffff"></rect>
+  <line x1="0" y1="400" x2="2400" y2="400" stroke="#D9E2EC" stroke-width="2"></line>
+  <line x1="1141" y1="40" x2="1141" y2="760" stroke="#D9E2EC" stroke-width="5"></line>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M210 184.0 L1141 184.0 L2190 20.4" stroke="#D9E2EC" stroke-width="6"></path>
+    <path d="M210 220.0 L1141 220.0 L2190 83.6" stroke="#D9E2EC" stroke-width="6"></path>
+    <path d="M210 256.0 L1141 256.0 L2190 146.9" stroke="#D9E2EC" stroke-width="6"></path>
+    <path d="M210 292.0 L1141 292.0 L2190 210.2" stroke="#25AEC6" stroke-width="6"></path>
+    <path d="M210 328.0 L1141 328.0 L2190 273.5" stroke="#25AEC6" stroke-width="6"></path>
+    <path d="M210 364.0 L1141 364.0 L2190 336.7" stroke="#25AEC6" stroke-width="6"></path>
+    <path d="M210 400.0 L1141 400.0 L2190 400.0" stroke="#0B1F35" stroke-width="11"></path>
+    <path d="M210 436.0 L1141 436.0 L2190 463.3" stroke="#25AEC6" stroke-width="6"></path>
+    <path d="M210 472.0 L1141 472.0 L2190 526.5" stroke="#25AEC6" stroke-width="6"></path>
+    <path d="M210 508.0 L1141 508.0 L2190 589.8" stroke="#25AEC6" stroke-width="6"></path>
+    <path d="M210 544.0 L1141 544.0 L2190 653.1" stroke="#D9E2EC" stroke-width="6"></path>
+    <path d="M210 580.0 L1141 580.0 L2190 716.4" stroke="#D9E2EC" stroke-width="6"></path>
+    <path d="M210 616.0 L1141 616.0 L2190 779.6" stroke="#D9E2EC" stroke-width="6"></path>
+  </g>
+  <circle cx="1141" cy="400" r="26" fill="#9525AA"></circle>
+</svg>

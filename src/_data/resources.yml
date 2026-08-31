@@ -1,0 +1,21 @@
+# Resources shown on the site.
+# Add, remove, or reorder entries here — templates loop over this list.
+#
+# Each entry:
+#   category  short eyebrow label (e.g. Forum, Toolkit, Training)
+#   title     name of the resource
+#   blurb     one sentence on what it is / why it's useful
+#   url       destination
+#   featured  true to include it in the resource list on the Community
+#             page. Omit (or set false) to keep it for a future full
+#             /resources/ page only.
+#
+# The entries below are starter suggestions — swap them for the resources
+# the Association actually wants to point people to.
+
+- category: For educators
+  title: 4D-Bio
+  blurb: A framework for breaking down what students need to understand about delegating to AI, directing it well, questioning its output, and taking responsibility for the result. 
+  url: https://bioinfopro.github.io/ai-bioinformatics-practice-model/
+  featured: true
+
