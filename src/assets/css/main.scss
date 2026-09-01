@@ -234,6 +234,20 @@ main {
 // -----------------------------------------------------------------------
 .hero {
   background-color: var(--color-alice-blue);
+  // Every page hero (home / about / community) is locked to one height so
+  // the fold lines up across the site, whether the hero carries an eyebrow
+  // + CTA button (home) or just a headline + subhead (about, community).
+  // The content is centred in that box rather than pinned to a fixed
+  // top offset, so the shorter heroes still read as balanced.
+  display: flex;
+  align-items: center;
+  min-height: 26rem;
+}
+
+@media (max-width: 48rem) {
+  .hero {
+    min-height: 20rem;
+  }
 }
 
 // On the home layout .hero sits directly in <main>, outside .page-inner,
@@ -285,20 +299,20 @@ main {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  opacity: 0.2;
+  opacity: 0.15;
   pointer-events: none;
 }
 
 .hero--home::before {
-  background-image: url("../bioinfopro-hero-07-wavefronts.svg");
+  background-image: url("../images/bioinfopro-hero-07-wavefronts.svg");
 }
 
 .hero--about::before {
-  background-image: url("../bioinfopro-hero-05-growth.svg");
+  background-image: url("../images/bioinfopro-hero-05-growth.svg");
 }
 
 .hero--community::before {
-  background-image: url("../bioinfopro-hero-12-resolution.svg");
+  background-image: url("../images/bioinfopro-hero-12-resolution.svg");
 }
 
 // Keep the hero copy above the artwork layer.
@@ -310,8 +324,11 @@ main {
 }
 
 .hero-inner {
-  padding-top: var(--space-5);
-  padding-bottom: var(--space-5);
+  // Vertical rhythm inside the hero is now mostly handled by .hero's
+  // min-height + centring; this padding just keeps the copy off the box
+  // edges when the content is tall enough to approach them.
+  padding-top: var(--space-4);
+  padding-bottom: var(--space-4);
   max-width: 42rem;
 }
 
@@ -325,12 +342,15 @@ main {
   margin-bottom: var(--space-2);
 }
 
-// Sets its own font-family/color/line-height rather than relying on a
-// heading tag's base styles, so it renders correctly whether it's an
-// <h1> (home hero) or a <p> (about-page hero, which keeps a single true
-// <h1> — "About us" — for its heading hierarchy).
+// Sets its own font-family/weight/color/line-height rather than relying on
+// a heading tag's base styles, so it renders identically whether it's an
+// <h1> (home + community heroes) or a <p> (about-page hero, which keeps a
+// single true <h1> — "About us" — for its heading hierarchy). font-weight
+// is pinned explicitly because a bare <p> would otherwise fall back to 400
+// and read lighter than the home hero's <h1>.
 .hero-headline {
   font-family: var(--font-display);
+  font-weight: 700;
   color: var(--color-deep-blue);
   line-height: 1.15;
   font-size: clamp(2rem, calc(4vw + 1rem), 3.25rem);
@@ -443,6 +463,22 @@ main {
   font-family: var(--font-body);
   font-size: 0.85rem;
   text-align: center;
+  overflow: hidden;
+}
+
+// Once a card has real artwork, let it fill the box edge-to-edge instead
+// of the dashed "placeholder" framing above.
+.card-media:has(img) {
+  border-style: solid;
+  padding: 0;
+}
+
+.card-media img {
+  width: 100%;
+  height: 100%;
+  // The card artwork is wider than the card-media box, so "contain" (not
+  // "cover") is used to show the whole image rather than cropping it.
+  object-fit: contain;
 }
 
 .card-title {

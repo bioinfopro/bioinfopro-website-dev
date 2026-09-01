@@ -6,8 +6,8 @@ permalink: /about/
 
 <section class="hero hero--breakout hero--about">
   <div class="hero-inner">
-    <p class="hero-headline">Bioinformatics grew up fast, and no one paused to define the job.</p>
-    <p class="hero-subhead">So we define it based on skills, and celebrate every way into the field.</p>
+    <p class="hero-headline">Every computational mind in life sciences deserves a path forward.</p>
+    <p class="hero-subhead">We are creating doors that open based on skills and celebrate every way into the field.</p>
   </div>
 </section>
 

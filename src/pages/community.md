@@ -6,14 +6,14 @@ permalink: /community/
 
 <section class="hero hero--breakout hero--community">
   <div class="hero-inner">
-    <h1 class="hero-headline">Community</h1>
-    <p class="hero-subhead">Join our community</p>
+    <h1 class="hero-headline">Bioinformatics will move forward as a profession when practitioners talk to each other.</h1>
+    <p class="hero-subhead">Raise your voice.</p>
   </div>
 </section>
 
 ## Get Involved
 
-Bioinformatics will move forward as a profession when practitioners talk to each other. There's more than one way to get involved, from reading what other bioinformaticians are working through to talking it out with them directly.
+There's more than one way to get involved, from reading what other bioinformaticians are working through to talking it out with them directly.
 
 <div class="cta-card-grid">
   <article class="cta-card">
@@ -55,7 +55,7 @@ Bioinformatics will move forward as a profession when practitioners talk to each
 
 ## Resources
 
-Tools and frameworks from the community, for the work of practicing bioinformatics well.
+Tools and frameworks from and for the community to help us all practice bioinformatics consistently.
 
 <ul class="entry-list">
   {% assign featured_resources = site.data.resources | where: "featured", true %}
