@@ -1,0 +1,45 @@
+# Professional services listed on the /services/ page.
+# Add, remove, or reorder entries here — the template loops over this list.
+#
+# Each entry:
+#   area   which part of the practice it belongs to (Consulting, Education,
+#          Evaluation) — shown as the card tag
+#   title  short name of the offering
+#   blurb  one or two sentences on what we do
+#   url    optional — a link for more detail. Omit to show the card with
+#          no link.
+#
+# Entries are shown in the order they appear here, so keep each area's
+# offerings together.
+
+- area: Consulting
+  title: Bioinformatics support
+  blurb: We place experienced bioinformaticians on your project. They do the work with you and train your team as they go.
+
+- area: Consulting
+  title: Technical hiring support
+  blurb: We help you update your hiring process or run technical screenings to check whether candidates can do the work.
+
+- area: AI Education
+  title: Curriculum design
+  blurb: We adapt an existing curriculum to build in AI fluency alongside the core bioinformatics skills.
+
+- area: AI Education
+  title: AI-fluency training
+  blurb: We run AI-fluency training built around your team's tools and day-to-day work.
+
+- area: Management
+  title: Project coordination
+  blurb: We plan and coordinate bioinformatics work that runs across several people or groups, so it stays on track.
+
+- area: Events
+  title: Scientific events
+  blurb: We help you design conferences, summits, and workshops for a technical audience.
+
+- area: Education
+  title: Career insights
+  blurb: We share what employers look for when they hire for entry-level bioinformatics roles.
+
+- area: Education
+  title: Exam design 
+  blurb: We help you design course assessments that test practical skill and judgment when AI assistance is part of the workflow.
